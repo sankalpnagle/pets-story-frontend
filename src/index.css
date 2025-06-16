@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.slider-container {
+  margin-left: -291px;
+  overflow: visible;
+}
+
+.slick-slide {
+  /* transition: transform 0.3s ease; Smooth transition effect */
+}
+
+.slick-center {
+  margin-top: 15px;
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+/* Increase spacing between date cells */
+
+.rdp-month_caption {
+  margin-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+.rdp-caption_label {
+  color: #0b1a97;
+  font-weight: 700;
+  font-size: x-large;
+}
+
+.rdp-root {
+  --rdp-day_button-border-radius: 0 !important;
+  --rdp-day_button-border: none !important;
+  --rdp-selected-border: none !important;
+  --rdp-day-height: 35px !important;
+  --rdp-day-width: 37px !important;
+}
+.rdp-month_grid {
+  border-collapse: separate !important;
+  border-spacing: 5px 10px !important;
+  overflow: hidden;
+  margin-left: 5px;
+}
+/* General Styles for the Calendar */
+.journal-calendar .rdp {
+  font-family: Arial, sans-serif;
+}
+
+/* Add a small dot for "Daily" events */
+.calendar-dot-daily {
+  position: relative;
+}
+
+.calendar-dot-daily::after {
+  content: "";
+  position: absolute;
+  bottom: -6px; /* Adjust to position the dot below the date */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.daily {
+  background-color: #ffddb4;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.calendar-notify {
+  position: relative;
+}
+
+.calendar-notify::before {
+  content: "";
+  position: absolute;
+  bottom: 1.5rem;
+  right: -1.5rem;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background-image: url(/icons/Group.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* @apply animate-pulse; */
+}
+.rdp-selected {
+  font-weight: 600 !important;
+  font-size: medium !important;
+}
+
+.calender-tray{
+margin-left: 1.5rem;
+}
