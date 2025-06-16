@@ -252,24 +252,10 @@ const EditProfile = () => {
                 margin: "0 auto",
               }}
             >
-              {/* <div className="w-[200px] h-[200px] overflow-hidden rounded-full" style={{ position: "relative" }}>
-                <img
-                  src={userData?.profileImage || UserImage}
-                  alt="Profile"
-                  className=" transition-transform duration-300 hover:scale-105"
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    width: "100%",
-                    maxHeight: "200px",
-                  }}
-                />
-                   </div> */}
-
               <div
-                className={`w-[200px] h-[200px] overflow-hidden rounded-full mt-10 flex items-center justify-center ${
+                className={`w-[160px] h-[160px] overflow-hidden rounded-full mt-10 flex items-center justify-center ${
                   !userData?.profileImage
-                    ? "bg-white border border-[#C4C7C7] "
+                    ? "bg-white border border-[#C4C7C7]"
                     : ""
                 }`}
                 style={{ position: "relative" }}
@@ -278,13 +264,7 @@ const EditProfile = () => {
                   <img
                     src={userData.profileImage}
                     alt="Profile"
-                    className="transition-transform duration-300 hover:scale-105"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                      width: "100%",
-                      maxHeight: "200px",
-                    }}
+                    className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
                   />
                 ) : (
                   <span className="text-[#0b1A97] text-lg font-medium font-serif">
@@ -297,16 +277,18 @@ const EditProfile = () => {
                 style={{
                   position: "absolute",
                   bottom: "14px",
-                  right: "-6px",
-                  backgroundColor: "#0b1A97",
+                  right: "20px",
+                  backgroundColor: "#e8f0fe",
                   borderRadius: "50%",
+                  border: "1px solid black",
+                  color: "black",
                 }}
                 component="label"
               >
                 <img
                   src={CameraIcon}
                   alt="Camera"
-                  style={{ width: "2rem", height: "auto" }}
+                  style={{ width: "1rem", height: "auto" }}
                 />
 
                 <input
@@ -336,7 +318,7 @@ const EditProfile = () => {
                   {/* <button className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300">
                     <Google />
                   </button> */}
-                  <h1 className="text-xl">{user?.loginBy}</h1>
+                  {/* <h1 className="text-xl mr-6">{user?.loginBy}</h1> */}
                   {/* {user?.emailVerified ? (
                     <button className="bg-yellow-500 text-white px-3 py-1 rounded-full text-[10px] hover:bg-yellow-600 transition-colors duration-300">
                       Unlink-
@@ -572,7 +554,7 @@ const EditProfile = () => {
                         dateFormat="dd-MM-yyyy"
                         placeholderText="Select your date of birth"
                         popperPlacement="bottom-end"
-                        popperClassName="calender-tray" 
+                        popperClassName="calender-tray"
                       />
                     </div>
                     {touched.dateOfBirth && errors.dateOfBirth && (

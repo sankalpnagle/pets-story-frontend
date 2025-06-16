@@ -137,7 +137,7 @@ const PetProfile = () => {
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/2 -mt-2 text-center ">
             <h1 className=" text-2xl mt-4 font-bold">Pet Profile</h1>
-           
+
             <div className="relative mx-auto mt-10" style={{ width: "200px" }}>
               <img
                 src={
@@ -157,8 +157,9 @@ const PetProfile = () => {
                 style={{
                   position: "absolute",
                   bottom: "16px",
-                  right: "-12px",
-                  backgroundColor: "#0b1A97",
+                  right: "14px",
+                  backgroundColor: "#FBF8FF",
+                  border:"1px solid black",
                   borderRadius: "50%",
                   padding: "8px",
                   cursor: "pointer",
@@ -168,7 +169,7 @@ const PetProfile = () => {
                   src={CameraIcon}
                   alt="Camera"
                   style={{
-                    width: "2rem",
+                    width: "1rem",
                   }}
                 />
                 <input
@@ -199,10 +200,15 @@ const PetProfile = () => {
                 color: petData?.color || petDataFromRedux?.color || "",
                 gender: petData?.gender || petDataFromRedux?.gender || "",
                 about: petData?.about || petDataFromRedux?.about || "",
-                neuteredOrSpayed: petData?.neuteredOrSpayed || petDataFromRedux?.neuteredOrSpayed || "",
-                rfidChipStatus: petData?.rfidChipStatus || petDataFromRedux?.rfidChipStatus || "",
+                neuteredOrSpayed:
+                  petData?.neuteredOrSpayed ||
+                  petDataFromRedux?.neuteredOrSpayed ||
+                  "",
+                rfidChipStatus:
+                  petData?.rfidChipStatus ||
+                  petDataFromRedux?.rfidChipStatus ||
+                  "",
               }}
-
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
               enableReinitialize={true}
@@ -249,7 +255,9 @@ const PetProfile = () => {
                       />
                     </div>
                     {touched.breed && errors.breed && (
-                      <p className="text-red-500 text-sm ml-4">{errors.breed}</p>
+                      <p className="text-red-500 text-sm ml-4">
+                        {errors.breed}
+                      </p>
                     )}
                   </div>
 
@@ -271,7 +279,9 @@ const PetProfile = () => {
                       />
                     </div>
                     {touched.color && errors.color && (
-                      <p className="text-red-500 text-sm ml-4">{errors.color}</p>
+                      <p className="text-red-500 text-sm ml-4">
+                        {errors.color}
+                      </p>
                     )}
                   </div>
 
@@ -302,7 +312,9 @@ const PetProfile = () => {
                       </label>
                     </div>
                     {touched.gender && errors.gender && (
-                      <p className="text-red-500 text-sm ml-4">{errors.gender}</p>
+                      <p className="text-red-500 text-sm ml-4">
+                        {errors.gender}
+                      </p>
                     )}
                   </div>
 
@@ -320,7 +332,9 @@ const PetProfile = () => {
                       ></Field>
                     </div>
                     {touched.about && errors.about && (
-                      <p className="text-red-500 text-sm ml-4">{errors.about}</p>
+                      <p className="text-red-500 text-sm ml-4">
+                        {errors.about}
+                      </p>
                     )}
                   </div>
 

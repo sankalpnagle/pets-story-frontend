@@ -274,12 +274,12 @@ const UserRegister = () => {
           </p>
         </div>
 
-        <div className="flex items-center my-6">
+        {/* <div className="flex items-center my-6">
           <hr className="flex-1 border-gray-300" />
           <span className="mx-4 text-gray-500">Or Sign in with</span>
           <hr className="flex-1 border-gray-300" />
-        </div>
-        <div className="flex justify-center gap-4">
+        </div> */}
+        {/* <div className="flex justify-center gap-4">
           <button
             onClick={handleFacebookLogin}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300"
@@ -292,10 +292,10 @@ const UserRegister = () => {
           >
             <Google />
           </button>
-          {/* <button className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300">
+          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300">
             <Apple />
-          </button> */}
-        </div>
+          </button>
+        </div> */}
 
         <div className="text-center mt-6 mx-3">
           <p className="text-md text-gray-600">

@@ -23,7 +23,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Popover, Typography } from "@mui/material";
 import catDogIcon from "/icons/PetIcons/catDog.png";
 import MuiButton from "../../../components/button/MuiButton";
- 
+
 type Pet = {
   petId: string;
   name: string;
@@ -33,47 +33,46 @@ type Pet = {
   age: string;
   image: string;
 };
- 
+
 const UserDashBoard = () => {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down("tablet"));
   const userData = useSelector((state: any) => state?.userProfile?.data);
   const [searchTerm, setSearchTerm] = useState("");
   const [pendingData, setPendingData] = useState([]);
- 
+
   const navigate = useNavigate();
   const user = useSelector((state: any) => state.auth.user);
   const id = user?.id;
- 
+
   const [petData, setPetData] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
   const [journalData, setJournalData] = useState([]);
- 
+
   const userProfile = useSelector((state: any) => state?.userProfile?.profile);
- 
+
   const fullName = userProfile?.fullName;
   const userImage = userProfile?.profileImage;
- 
+
   useEffect(() => {
     const JournalsStatus = async () => {
       try {
         const currentDate = new Date();
         const dayOfWeek = currentDate.getDay();
- 
+
         const isValidDay = dayOfWeek === 2 || dayOfWeek === 5;
- 
+
         if (isValidDay) {
           const payload = {
             date: currentDate.toISOString().split("T")[0],
             userId: id,
           };
- 
+
           const res = await checkJournalsStatus(payload);
 
           console.log(res.data.pending, "respo");
-          
- 
+
           setPendingData(res.data.pending || []);
         } else {
           setPendingData([]);
@@ -82,10 +81,10 @@ const UserDashBoard = () => {
         console.error("Error fetching journal status:", error);
       }
     };
- 
+
     JournalsStatus();
   }, []);
- 
+
   const getAllJournals = async () => {
     try {
       const payload = {
@@ -97,7 +96,7 @@ const UserDashBoard = () => {
       console.log(error);
     }
   };
- 
+
   useEffect(() => {
     const fetchPets = async () => {
       setLoading(true);
@@ -125,52 +124,52 @@ const UserDashBoard = () => {
     fetchPets();
     getAllJournals();
   }, []);
- 
+
   const missingPetIds = journalData
     .filter((entry) => entry.status === "Pending")
     .map((entry) => entry.missingPetIds)
     .flat()
     .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
- 
+
   console.log("Missing Pet IDs:", missingPetIds);
- 
+
   const handleSearch = () => {
     if (searchTerm.trim()) {
       // navigate(`/AIPetAssistant?search=${searchTerm}`);
       navigate("/AIPetAssistant", { state: { searchTerm: searchTerm } });
     }
   };
- 
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
- 
+
   const [anchorEl, setAnchorEl] = useState(null);
- 
+
   const handlePopoverOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
- 
+
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
- 
+
   const open = Boolean(anchorEl);
- 
+
   const handleAddPet = () => {
     navigate("/petHome");
   };
- 
+
   const handleClick = () => {
     navigate("/My-profile");
   };
- 
+
   const handleProfile = () => {
     navigate("/Profile-edit");
   };
- 
+
   return (
     <div className="h-screen sm:w-full w-[100vw]  bg-white">
       <div>
@@ -207,7 +206,7 @@ const UserDashBoard = () => {
                
               </button>
             </div> */}
- 
+
             {/* <div className="ml-auto">
               <button
                 className={`${isTablet ? "" : "my-3"}`}
@@ -264,13 +263,11 @@ const UserDashBoard = () => {
               </button>
             </div> */}
           </div>
- 
+
           <div className="flex gap-x-4 mx-4 items-center sm:mt-6">
             <div className="w-11 h-11 ml-1 overflow-hidden rounded-full bg-[#D9D9D9] flex items-center justify-center">
               <img
-                className={`object-cover object-center ${
-                  user?.profileImage ? "w-full" : "w-6 h-6"
-                }`}
+                className="w-full h-full object-cover object-center"
                 src={user?.profileImage ? user?.profileImage : ManIcon}
                 alt=""
                 onClick={handleClick}
@@ -283,7 +280,7 @@ const UserDashBoard = () => {
               <p className="text-xs">How can we help your pets today?</p>
             </div>
           </div>
- 
+
           <div className="flex mx-auto sm:mx-6 bg-white overflow-hidden my-4 p-2 sm:p-2 rounded-full w-[90vw] max-w-96 ">
             <input
               type="text"
@@ -300,7 +297,7 @@ const UserDashBoard = () => {
               onClick={handleSearch}
             />
           </div>
- 
+
           <nav className="flex-1 w-full mt-3 bg-white rounded-t-3xl px-4 py-6 overflow-y-auto">
             {loading ? (
               <div className="flex justify-center items-center h-96">
@@ -324,7 +321,7 @@ const UserDashBoard = () => {
               //     </button>
               //   </div>
               // </div>
- 
+
               <div>
                 <div className="mx-auto w-fit max-w-[500px] mt-14 flex justify-center">
                   <div className="text-4xl flex">
@@ -401,7 +398,7 @@ const UserDashBoard = () => {
                         );
 
                         console.log(hasNotification, "hasNotification");
-                        
+
                         return (
                           <div
                             key={index}
@@ -463,5 +460,5 @@ const UserDashBoard = () => {
     </div>
   );
 };
- 
+
 export default UserDashBoard;
