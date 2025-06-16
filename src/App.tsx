@@ -26,7 +26,7 @@ import PetHealthProfile from "./pages/pet/PetHealthProfile";
 import AddPet from "./pages/pet/AddPet";
 import PetDetails from "./pages/pet/PetDetails";
 import { useSelector } from "react-redux";
-import { onMessageListener, requestFCMToken } from "./utils/firebaseUtils";
+import { onMessageListener, requestFCMToken } from "./utils/fireBaseUtils";
 import { saveFCMToken } from "./services/Notification/Notification";
 // import "swiper/swiper-bundle.css";
 import SmartJournal from "./pages/journal/SmartJournal";

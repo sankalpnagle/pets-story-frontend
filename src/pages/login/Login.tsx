@@ -24,7 +24,7 @@ import { signInWithPopup } from "firebase/auth";
 import { UserData } from "../../redux/slice/UserProfileSlice";
 import { saveFCMToken } from "../../services/Notification/Notification";
 import { CircularProgress } from "@mui/material";
-import { requestFCMToken } from "../../utils/firebaseUtils";
+import { onMessageListener, requestFCMToken } from "../../utils/fireBaseUtils";
 // import {  googleProvider } from "../../../firebaseConfig;
 
 const validationSchema = Yup.object({
