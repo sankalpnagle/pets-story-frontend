@@ -23,7 +23,7 @@ const AIPetAssistant = () => {
   const isTablet = useMediaQuery(theme.breakpoints.down("tablet"));
   const navigate = useNavigate();
   const userData = useSelector((state: any) => state.auth.user);
-  let petname;
+  let petname: string;
 
   const location = useLocation();
   const { searchTerm } = location.state || {};
@@ -33,9 +33,7 @@ const AIPetAssistant = () => {
     "My cat has stopped eating their usual food—should I be worried?",
     "Is my puppy [Your Pet Name] getting enough exercise for their age and breed?",
     "Why does my pet [Your Pet Name] seem anxious whenever I leave the house?",
-    `When is @${
-      userData.fullName ? userData.fullName : "Hooman"
-    }’s next pet visit?`,
+    "When is [Your Pet Name]’s next pet visit?",
   ];
 
   const fetchBotResponse = async (userInput: string) => {

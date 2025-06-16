@@ -20,12 +20,12 @@
 
 - **Front - End**
 ```bash
-   git clone https://github.com/Gigatorb-Software/story-of-pets.git
+   git clone https://github.com/Story-Of-Pets/MVP-PWA-Frontend
    ```
 
 - **Backend - End**
 ```bash
-   git clone https://github.com/Gigatorb-Software/story-of-pet-backend.git
+   git clone https://github.com/Story-Of-Pets/MVP-PWA-Backend
    ```
     
 2. Install frontend dependencies:

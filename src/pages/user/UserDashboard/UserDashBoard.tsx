@@ -70,6 +70,9 @@ const UserDashBoard = () => {
           };
  
           const res = await checkJournalsStatus(payload);
+
+          console.log(res.data.pending, "respo");
+          
  
           setPendingData(res.data.pending || []);
         } else {
@@ -396,6 +399,9 @@ const UserDashBoard = () => {
                         const hasPending = missingPetIds.some(
                           (ob) => ob === item.petId
                         );
+
+                        console.log(hasNotification, "hasNotification");
+                        
                         return (
                           <div
                             key={index}
@@ -413,8 +419,8 @@ const UserDashBoard = () => {
                                 }
                               />
                             </div>
- 
-                            {hasPending && (
+
+                            {(hasNotification || hasPending) && (
                               <div>
                                 <button
                                   onClick={() =>
@@ -427,7 +433,7 @@ const UserDashBoard = () => {
                                     className="absolute -top-3 left-2.5"
                                     alt=""
                                   />
- 
+
                                   <img
                                     src={taskAdd}
                                     className="h-3.5 w-3.5"

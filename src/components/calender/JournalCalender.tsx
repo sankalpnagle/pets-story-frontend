@@ -88,21 +88,31 @@ const JournalCalender: React.FC<JournalCalenderProps> = ({
     .filter((entry) => entry.status === "Completed")
     .map((entry) => new Date(entry.date).toISOString().split("T")[0]);
 
+  const resetTime = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0); // Reset time to midnight
+    return newDate;
+  };
+
   const modifiers: DayPickerProps["modifiers"] = {
     Daily: (date) => date.getDay() === 2 || date.getDay() === 5,
     Comprehensive: (date) => isLastFriday(date),
-    today: (date) => date.toDateString() === new Date().toDateString(),
+    today: (date) =>
+      resetTime(date).getTime() === resetTime(new Date()).getTime(),
     notify: (date) => {
       const dateStr = date.toISOString().split("T")[0];
+      const currentDate = resetTime(new Date());
 
       return (
         date <= new Date() &&
+        resetTime(date) >= currentDate &&
         (modifiers.Daily(date) || modifiers.Comprehensive(date)) &&
-        date >= earliestDate &&
+        resetTime(date) >= resetTime(earliestDate) &&
         !completedDates.includes(dateStr)
       );
     },
   };
+
 
   const modifiersStyles: DayPickerProps["modifiersStyles"] = {
     Comprehensive: { backgroundColor: "#BDC2FF", borderRadius: "50%" },
