@@ -30,7 +30,6 @@ import { onMessageListener, requestFCMToken } from "./utils/firebaseUtils";
 import { saveFCMToken } from "./services/Notification/Notification";
 // import "swiper/swiper-bundle.css";
 import SmartJournal from "./pages/journal/SmartJournal";
-// import { requestFCMToken,onMessageListener } from "./utils/firebaseUtils.js";
 import "react-day-picker/style.css";
 import AddSmartJournal from "./pages/journal/AddSmartJournal";
 import PetHome from "./pages/pet/PetHome";

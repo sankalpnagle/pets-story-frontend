@@ -59,7 +59,7 @@ const AuthHome = () => {
     }
   };
   return (
-    <div className="bg-[#FBF8FF] ">
+    <div className="bg-[#FBF8FF] h-[120vh] ">
       <div className="mx-auto w-96 min-w-96 px-5 h-screen">
         <div className="pt-28">
           <img src={sop} width={90} height={90} alt="" />

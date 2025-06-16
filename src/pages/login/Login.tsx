@@ -25,7 +25,6 @@ import { UserData } from "../../redux/slice/UserProfileSlice";
 import { saveFCMToken } from "../../services/Notification/Notification";
 import { CircularProgress } from "@mui/material";
 import { requestFCMToken } from "../../utils/firebaseUtils";
-// import { requestFCMToken } from "../../utils/firebaseUtils";
 // import {  googleProvider } from "../../../firebaseConfig;
 
 const validationSchema = Yup.object({
@@ -71,7 +70,7 @@ const Login = () => {
           token: response.data.data.token,
           role: response.data.data.role,
           id: response.data.data.uid,
-          loginBy :  "Logged in with email"
+          loginBy: "Logged in with email",
         })
       );
 
@@ -126,7 +125,7 @@ const Login = () => {
   //     // localStorage.setItem("token", response.data.data.token);
   //     // localStorage.setItem("role", response.data.data.role);
   //     // localStorage.setItem("username", response.data.data.fullName);
-      
+
   //     // dispatch(
   //     //   SetUserData({
   //     //     ...response?.data?.data,
@@ -307,61 +306,105 @@ const Login = () => {
               isSubmitting,
             }) => (
               <Form>
-                <div className="mb-4">
-                  <Field
-                    name="email"
-                    as={MuiInput}
-                    placeholder="Email Address"
-                    type="email"
-                    fullWidth
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    leftIcon={<OutlineMessage />}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
-                </div>
+                <div className="w-full max-w-md mx-auto">
+                  <div className="mb-6">
+                    <Field
+                      name="email"
+                      as={MuiInput}
+                      placeholder="Email Address"
+                      type="email"
+                      fullWidth
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      leftIcon={<OutlineMessage className="text-gray-500" />}
+                      error={Boolean(touched.email && errors.email)}
+                      helperText={touched.email && errors.email}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "12px",
+                          backgroundColor: "#e8f0fe",
+                          "&:hover": {
+                            backgroundColor: "#e8f0fe",
+                          },
+                          "&.Mui-focused": {
+                            backgroundColor: "#e8f0fe",
+                            boxShadow: "0 0 0 2px rgba(11, 26, 151, 0.1)",
+                          },
+                        },
+                      }}
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <Field
-                    name="password"
-                    as={MuiInput}
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
-                    fullWidth
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    leftIcon={<SquareLock />}
-                    rightIcon={
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? <EyeOpen /> : <ViewOff />}
-                      </div>
-                    }
-                    error={Boolean(touched.password && errors.password)}
-                    helperText={touched.password && errors.password}
-                  />
-                </div>
+                  <div className="mb-6">
+                    <Field
+                      name="password"
+                      as={MuiInput}
+                      placeholder="Password"
+                      type={showPassword ? "text" : "password"}
+                      fullWidth
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      leftIcon={<SquareLock />}
+                      rightIcon={
+                        <div
+                          className="cursor-pointer hover:text-gray-700 transition-colors"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? <EyeOpen /> : <ViewOff />}
+                        </div>
+                      }
+                      error={Boolean(touched.password && errors.password)}
+                      helperText={touched.password && errors.password}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "12px",
+                          backgroundColor: "#e8f0fe",
+                          "&:hover": {
+                            backgroundColor: "#e8f0fe",
+                          },
+                          "&.Mui-focused": {
+                            backgroundColor: "#e8f0fe",
+                            boxShadow: "0 0 0 2px rgba(11, 26, 151, 0.1)",
+                          },
+                        },
+                      }}
+                    />
+                  </div>
 
-                <div className="mt-6">
-                  <MuiButton
-                    variant="contained"
-                    size="large"
-                    color="#0B1A97"
-                    fullWidth
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <CircularProgress size={24} color="inherit" /> // Show loader when submitting
-                    ) : (
-                      "Sign in" // Show text when not submitting
-                    )}
-                  </MuiButton>
+                  <div className="mt-8">
+                    <MuiButton
+                      variant="contained"
+                      size="large"
+                      fullWidth
+                      type="submit"
+                      disabled={isSubmitting}
+                      sx={{
+                        backgroundColor: "#0B1A97",
+                        borderRadius: "12px",
+                        padding: "12px",
+                        textTransform: "none",
+                        fontSize: "1rem",
+                        fontWeight: 600,
+                        boxShadow: "0 4px 6px rgba(11, 26, 151, 0.1)",
+                        "&:hover": {
+                          backgroundColor: "#0A1780",
+                          boxShadow: "0 6px 8px rgba(11, 26, 151, 0.15)",
+                        },
+                        "&:disabled": {
+                          backgroundColor: "#E5E7EB",
+                          color: "#9CA3AF",
+                        },
+                      }}
+                    >
+                      {isSubmitting ? (
+                        <CircularProgress size={24} color="inherit" />
+                      ) : (
+                        "Sign in"
+                      )}
+                    </MuiButton>
+                  </div>
                 </div>
               </Form>
             )}
@@ -370,7 +413,7 @@ const Login = () => {
 
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
-            Can’t sign in?{" "}
+            Can't sign in?{" "}
             <Link to="/forgotPassword" className="text-blue-600 font-semibold">
               Reset Password
             </Link>
@@ -405,7 +448,7 @@ const Login = () => {
 
         <div className="text-center mt-6">
           <p className="text-md text-gray-600">
-            Don’t have an account yet?{" "}
+            Don't have an account yet?{" "}
             <Link to="/userSignup" className="text-blue-600 font-semibold">
               Sign up
             </Link>

@@ -1,7 +1,12 @@
 // firebaseConfig.js
-import { initializeApp } from "firebase/app";
-import { getAuth ,GoogleAuthProvider,OAuthProvider,FacebookAuthProvider} from "firebase/auth";
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { initializeApp, getApps } from "firebase/app";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  OAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 // Your Firebase configuration object from Firebase Console
 const firebaseConfig = {
@@ -11,11 +16,12 @@ const firebaseConfig = {
   storageBucket: "storyofpets-178bc.firebasestorage.app",
   messagingSenderId: "1080624052763",
   appId: "1:1080624052763:web:162dd963d442a2c2bdd6be",
-  measurementId: "G-WTZBKY0DN5"
+  measurementId: "G-WTZBKY0DN5",
 };
 
-// Initialize Firebase App
-const firebaseApp = initializeApp(firebaseConfig);
+// Initialize Firebase App only if it hasn't been initialized
+const firebaseApp =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const messaging = getMessaging(firebaseApp);
 
 // Export Firebase services
@@ -26,4 +32,4 @@ const facebookProvider = new FacebookAuthProvider();
 // appleProvider.addScope('email');
 // appleProvider.addScope('name');
 
-export { firebaseApp, auth ,messaging, googleProvider,facebookProvider};
+export { firebaseApp, auth, messaging, googleProvider, facebookProvider };
