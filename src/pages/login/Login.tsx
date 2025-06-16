@@ -21,15 +21,11 @@ import { SetUserData } from "../../redux/slice/AuthSlice";
 import { toast } from "react-toastify";
 import EyeOpen from "../../assets/icons/EyeOpen";
 import { signInWithPopup } from "firebase/auth";
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
-} from "../../../firebaseConfig";
 import { UserData } from "../../redux/slice/UserProfileSlice";
-import { requestFCMToken } from "../../utils/firebaseUtils";
 import { saveFCMToken } from "../../services/Notification/Notification";
 import { CircularProgress } from "@mui/material";
+import { requestFCMToken } from "../../utils/firebaseUtils";
+// import { requestFCMToken } from "../../utils/firebaseUtils";
 // import {  googleProvider } from "../../../firebaseConfig;
 
 const validationSchema = Yup.object({
@@ -116,133 +112,133 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      // Trigger the Google login popup
-      const result = await signInWithPopup(auth, googleProvider);
+  // const handleGoogleLogin = async () => {
+  //   try {
+  //     // Trigger the Google login popup
+  //     // const result = await signInWithPopup(auth, GoogleAuthProvider);
 
-      // Get the ID token from the authenticated user
-      const idToken = await result.user.getIdToken();
+  //     // Get the ID token from the authenticated user
+  //     // const idToken = await result.user.getIdToken();
 
-      // Send the token to the backend for verification
-      const response = await apiLoginWithGoogle({ idToken });
-      // Process backend response (similar to email login)
-      localStorage.setItem("token", response.data.data.token);
-      localStorage.setItem("role", response.data.data.role);
-      localStorage.setItem("username", response.data.data.fullName);
+  //     // Send the token to the backend for verification
+  //     // const response = await apiLoginWithGoogle({ idToken });
+  //     // Process backend response (similar to email login)
+  //     // localStorage.setItem("token", response.data.data.token);
+  //     // localStorage.setItem("role", response.data.data.role);
+  //     // localStorage.setItem("username", response.data.data.fullName);
       
-      dispatch(
-        SetUserData({
-          ...response?.data?.data,
-          email: response.data.data.email,
-          token: response.data.data.token,
-          role: response.data.data.role,
-          id: response.data.data.uid,
-          loginBy :  "Logged in with google"
-        })
-      );
+  //     // dispatch(
+  //     //   SetUserData({
+  //     //     ...response?.data?.data,
+  //     //     email: response.data.data.email,
+  //     //     token: response.data.data.token,
+  //     //     role: response.data.data.role,
+  //     //     id: response.data.data.uid,
+  //     //     loginBy :  "Logged in with google"
+  //     //   })
+  //     // );
 
-      toast.success("Google Login Successful!", {
-        onClose: () => {
-          switch (response.data.data.role) {
-            case "admin":
-              navigate("/vet-dashboard");
-              break;
-            case "user":
-              navigate("/user-dashboard");
-              break;
-            default:
-              navigate("/");
-          }
-        },
-      });
-      console.log("ffffffffm crun in asdf ")
-      const fetchFCMToken = async () => {
-        try {
-          console.log("fetchingtoken");
-          const token = await requestFCMToken();
-          console.log("fcm token generated", token);
-          const payload = {
-            token: token,
-            userId: response.data.data.email,
-          };
-          if (token) {
-            const res = await saveFCMToken(payload);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchFCMToken();
-    } catch (error) {
-      console.error("Google Login Error:", error);
-      toast.error("Google login failed, please try again!");
-    }
-  };
+  //     // toast.success("Google Login Successful!", {
+  //     //   onClose: () => {
+  //     //     switch (response.data.data.role) {
+  //     //       case "admin":
+  //     //         navigate("/vet-dashboard");
+  //     //         break;
+  //     //       case "user":
+  //     //         navigate("/user-dashboard");
+  //     //         break;
+  //     //       default:
+  //     //         navigate("/");
+  //     //     }
+  //     //   },
+  //     // });
+  //     console.log("ffffffffm crun in asdf ")
+  //     const fetchFCMToken = async () => {
+  //       try {
+  //         console.log("fetchingtoken");
+  //         const token = await requestFCMToken();
+  //         console.log("fcm token generated", token);
+  //         const payload = {
+  //           token: token,
+  //           userId: response.data.data.email,
+  //         };
+  //         if (token) {
+  //           const res = await saveFCMToken(payload);
+  //         }
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     };
+  //     fetchFCMToken();
+  //   } catch (error) {
+  //     console.error("Google Login Error:", error);
+  //     toast.error("Google login failed, please try again!");
+  //   }
+  // };
 
-  const handleFacebookLogin = async () => {
-    try {
-      // Trigger Facebook login popup
-      const result = await signInWithPopup(auth, facebookProvider);
+  // const handleFacebookLogin = async () => {
+  //   try {
+  //     // Trigger Facebook login popup
+  //     const result = await signInWithPopup(auth\, facebookProvider);
 
-      // Retrieve the ID token from the user
-      const idToken = await result.user.getIdToken();
+  //     // Retrieve the ID token from the user
+  //     const idToken = await result.user.getIdToken();
 
-      // Send token to your backend for verification
-      const response = await apiLoginWithFacebook({ idToken });
-      // Save user data in localStorage and Redux (or context)
-      localStorage.setItem("token", response.data.data.token);
-      localStorage.setItem("role", response.data.data.role);
-      localStorage.setItem("username", response.data.data.fullName);
+  //     // Send token to your backend for verification
+  //     const response = await apiLoginWithFacebook({ idToken });
+  //     // Save user data in localStorage and Redux (or context)
+  //     localStorage.setItem("token", response.data.data.token);
+  //     localStorage.setItem("role", response.data.data.role);
+  //     localStorage.setItem("username", response.data.data.fullName);
 
-      dispatch(
-        SetUserData({
-          ...response?.data?.data,
-          email: response.data.data.email,
-          token: response.data.data.token,
-          role: response.data.data.role,
-          id: response.data.data.uid,
-          loginBy :  "Logged in with facebook"
-        })
-      );
+  //     dispatch(
+  //       SetUserData({
+  //         ...response?.data?.data,
+  //         email: response.data.data.email,
+  //         token: response.data.data.token,
+  //         role: response.data.data.role,
+  //         id: response.data.data.uid,
+  //         loginBy :  "Logged in with facebook"
+  //       })
+  //     );
 
-      // Navigate based on role
-      toast.success("Facebook Login Successful!", {
-        onClose: () => {
-          switch (response.data.data.role) {
-            case "admin":
-              navigate("/admin-dashboard");
-              break;
-            case "user":
-              navigate("/user-dashboard");
-              break;
-            default:
-              navigate("/");
-          }
-        },
-      });
-      const fetchFCMToken = async () => {
-        try {
-          console.log("fetchingtoken");
-          const token = await requestFCMToken();
-          console.log("fcm token generated", token);
-          const payload = {
-            token: token,
-            userId: response.data.data.email,
-          };
-          if (token) {
-            const res = await saveFCMToken(payload);
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchFCMToken();
-    } catch (error) {
-      console.error("Facebook Login Error:", error);
-      toast.error("Facebook login failed, please try again!");
-    }
-  };
+  //     // Navigate based on role
+  //     toast.success("Facebook Login Successful!", {
+  //       onClose: () => {
+  //         switch (response.data.data.role) {
+  //           case "admin":
+  //             navigate("/admin-dashboard");
+  //             break;
+  //           case "user":
+  //             navigate("/user-dashboard");
+  //             break;
+  //           default:
+  //             navigate("/");
+  //         }
+  //       },
+  //     });
+  //     const fetchFCMToken = async () => {
+  //       try {
+  //         console.log("fetchingtoken");
+  //         const token = await requestFCMToken();
+  //         console.log("fcm token generated", token);
+  //         const payload = {
+  //           token: token,
+  //           userId: response.data.data.email,
+  //         };
+  //         if (token) {
+  //           const res = await saveFCMToken(payload);
+  //         }
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     };
+  //     fetchFCMToken();
+  //   } catch (error) {
+  //     console.error("Facebook Login Error:", error);
+  //     toast.error("Facebook login failed, please try again!");
+  //   }
+  // };
   // const handleAppleLogin = async () => {
   //   try {
   //     // Trigger the Apple login popup
@@ -386,7 +382,7 @@ const Login = () => {
           <span className="mx-4 text-gray-500">Or Sign in with</span>
           <hr className="flex-1 border-gray-300" />
         </div>
-        <div className="flex justify-center gap-4">
+        {/* <div className="flex justify-center gap-4">
           <button
             onClick={handleFacebookLogin}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300"
@@ -399,13 +395,13 @@ const Login = () => {
           >
             <Google />
           </button>
-          {/* <button
+          <button
             onClick={handleAppleLogin}
             className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300"
           >
             <Apple />
-          </button> */}
-        </div>
+          </button>
+        </div> */}
 
         <div className="text-center mt-6">
           <p className="text-md text-gray-600">
